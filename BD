@@ -1,0 +1,37 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS Commande;
+DROP TABLE IF EXISTS Client;
+DROP TABLE IF EXISTS Panier;
+DROP TABLE IF EXISTS StockArticle;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE Commande (
+    idClient serial NOT NULL,
+    NArticle text NOT NULL,
+    taille serial NOT NULL,
+    Montant serial NOT NULL,
+    PRIMARY KEY (NArticle)
+);
+
+CREATE TABLE Client (
+    idClient Serial NOT NULL,
+    nom text NOT NULL,
+    prenom text NOT NULL,
+    mail text NOT NULL,
+    MDP text NOT NULL,
+    PRIMARY KEY (idClient)
+);
+
+CREATE TABLE Panier (
+    idClient serial NOT NULL,
+    NArticle text NOT NULL,
+    prix serial NOT NULL,
+    taille text NOT NULL,
+    PRIMARY KEY (idClient)
+);
+
+CREATE TABLE StockArticle (
+    NArticle text NOT NULL,
+    Stock serial NOT NULL,
+    PRIMARY KEY (NArticle)
+);

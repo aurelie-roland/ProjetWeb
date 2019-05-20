@@ -1,0 +1,49 @@
+.body{
+    background-image:url("../../images/Fond.jpg");
+    background-attachment:fixed;
+    background-size:100%;
+}
+
+.banniere{
+    width: 90%;
+}
+
+header{
+    margin:0 auto; 
+    text-align:center;
+    padding-top:1%;
+}
+
+#main{
+    margin-top:2%;
+    margin-left:5%;
+    margin-right:5%;
+    border-style:ridge;
+    border-width:3px;
+    border-radius:5px;
+    box-shadow:7px 10px 5px black;
+    padding-left:2em;
+    padding-right:2em;
+    background-color:white;
+    text-align:justify;
+    line-height:1.8em;
+    text-indent:50px;
+    padding-left:2%;
+    padding-right:2%;
+}
+
+#main img{
+	width:15em;
+}
+
+
+#ac{
+    padding-top:3em;
+    padding-bottom:3em;
+}
+
+#ac img{
+    width:95%;
+    padding-left:4%;
+    padding-right:2%;
+}
