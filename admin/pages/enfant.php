@@ -5,10 +5,9 @@ $set_name = false;
 
 if (isset($_POST['submit'])) {
     echo $_POST['numero'];
-    echo $_POST['prix'];
     $Taille = 0;
     $Article = $_POST['numero'];
-    //$Prix = $_POST['prix'];
+    $Prix1 = $Prix;
     $set_name = true;
 }
 ?>
@@ -34,7 +33,7 @@ $stock = new StockArticleDB($cnx);
 
 $liste = array();
 $liste = null;
-$liste = $stock->getAllProduitsAutres();
+$liste = $stock->getAllProduitsEnfant();
 ?>
 
 <?php
@@ -61,15 +60,16 @@ if ($liste != null) {
                     $prix = $liste[$i]['prix'];
                     ?>
                     <tr>
-                        <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Bijoux Star Wars"/> '; ?></th>
+                        <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Vetement enfant Star Wars"/> '; ?></th>
                         <td>Prix : <?php echo $prix . '€'; ?></td>
                         <td>
                             <input type='hidden' name = "numero" value ="<?php echo $numero; ?>"> 
-                            <input type='hidden' name = "prix" value ="<?php echo $prix; ?>"> 
                             <?php
+                           
                             echo '<input type="submit" name="submit" id="submit" value="Ajouter au panier" class="Send">';
                             ?></td>
                     </tr>
+
                     <?php
                 }
                 ?>
@@ -79,7 +79,8 @@ if ($liste != null) {
         <hr>
     </div>
     <?php
-} else {
+}
+else {
     ?>
     <div class="container">
         <p>( contenu signifiant un problème ... )</p>

@@ -1,17 +1,3 @@
-<?php
-include ('lib/php/verifier_connexion.php');
-
-$set_name = false;
-
-if (isset($_POST['submit'])) {
-    echo $_POST['numero'];
-    echo $_POST['prix'];
-    $Taille = 0;
-    $Article = $_POST['numero'];
-    //$Prix = $_POST['prix'];
-    $set_name = true;
-}
-?>
 
 <br>
 <div id="Tri">
@@ -34,7 +20,7 @@ $stock = new StockArticleDB($cnx);
 
 $liste = array();
 $liste = null;
-$liste = $stock->getAllProduitsAutres();
+$liste = $stock->getAllProduitsHomme();
 ?>
 
 <?php
@@ -47,32 +33,27 @@ if ($liste != null) {
                 <tr>
                     <th scope="col">Article</th>
                     <th scope="col">Prix</th>
-                    <th scope="col">Commander</th>
                 </tr>
             </thead>
             <tbody>
             <form name="Variable" method="post" action="">
-                <?php
-                for ($i = 0; $i < $nbr; $i++) {
-                    ?>
+    <?php
+    for ($i = 0; $i < $nbr; $i++) {
+        ?>
                     <?php
-                    $fichier = '../admin/images/' . $liste[$i]['narticle'] . '.jpg';
+                    $fichier = './admin/images/' . $liste[$i]['narticle'] . '.jpg';
                     $numero = $liste[$i]['narticle'];
                     $prix = $liste[$i]['prix'];
                     ?>
                     <tr>
-                        <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Bijoux Star Wars"/> '; ?></th>
+                        <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Vetements homme Star Wars"/> '; ?></th>
                         <td>Prix : <?php echo $prix . '€'; ?></td>
-                        <td>
-                            <input type='hidden' name = "numero" value ="<?php echo $numero; ?>"> 
-                            <input type='hidden' name = "prix" value ="<?php echo $prix; ?>"> 
-                            <?php
-                            echo '<input type="submit" name="submit" id="submit" value="Ajouter au panier" class="Send">';
-                            ?></td>
+
                     </tr>
-                    <?php
-                }
-                ?>
+
+        <?php
+    }
+    ?>
             </form>
             </tbody>
         </table>

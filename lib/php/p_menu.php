@@ -25,16 +25,16 @@ if(isset($_POST['submit_login'])){
            <a class="nav-link" href="./index.php?page=accueil.php">Accueil</a>
         </div>
         <div class="col-sm">
-          Vêtements hommes
+          <a class="nav-link" href="./index.php?page=hommeP.php">Vetements hommes</a>
         </div>
         <div class="col-sm">
-          Vêtement femmes
+          <a class="nav-link" href="./index.php?page=femmeP.php">Vetements femmes</a>
         </div>
         <div class="col-sm">
-          Vêtements enfants
+          <a class="nav-link" href="./index.php?page=enfantP.php">Vetements enfants</a>
         </div>
          <div class="col-sm">
-          Produits dérivés
+          <a class="nav-link" href="./index.php?page=bijouxP.php">Produits dérivés</a>
         </div>
          <div class="col-sm">
             <div class="dropdown">
