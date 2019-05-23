@@ -16,7 +16,7 @@
             <a class="nav-link" href="./index.php?page=bijoux.php">Produits dérivés</a>
         </div>
         <div class="col-sm">
-            Panier
+            <a class="nav-link" href="./index.php?page=panier.php">Panier</a>
         </div>
         <div class="col-sm">
             <a class="nav-link" href="./index.php?page=disconnect.php">Déconnexion</a>

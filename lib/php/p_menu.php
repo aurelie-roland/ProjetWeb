@@ -7,12 +7,11 @@ if(isset($_POST['submit_login'])){
     $log = new AdminDB($cnx);
     //$admin et $password sont les noms des champs du formulaire
     $admin = $log->getAdmin($login, $password);
-    var_dump($admin);
     if(is_null($admin)){
         print "<br/>Données incorrectes";        
     }
     else {
-        $_SESSION['admin']=1;
+        $_SESSION['admin']=$admin;
         unset($_SESSION['page']);        
         print "<meta http-equiv=\"refresh\": Content=\"0;URL=./admin/index.php\">";
     }
