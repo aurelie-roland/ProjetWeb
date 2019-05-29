@@ -11,7 +11,7 @@ class StockArticleDB  extends StockArticle{
     public function getAllProduitsAutres() {
         try {
             $this->_db->beginTransaction();
-            $query = "select * from StockArticle where categorie = 'Autres' and stock > 0";
+            $query = "select * from StockArticle where categorie = 'Autres' and stock > 0 order by id";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $this->_db->commit();

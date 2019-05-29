@@ -26,24 +26,22 @@ if (isset($_POST['sub'])) {
         $prix = $num['prix'];
         $stock = new StockArticleDB($cnx);
         $array = $stock->getStock($number);
-        var_dump($array);
-        //$stock = $array[0]['stock'] - 1;
-        $stock = 1;
-        $com = new CommandeDB($cnx);
-        $com->ajoutCommande($admin, $number, $prix, $taille);
-        $stock->supStock($number, $stock);
-        $panier->deletePanierID($admin);
-        header('Location:index.php?page=success.php');
+        $stock1 = $array[0]['stock'] - 1;
+        if ($stock1 + 1 > 0) {
+            $com = new CommandeDB($cnx);
+            $com->ajoutCommande($admin, $number, $prix, $taille);
+            $stock->supStock($number, $stock1);
+        }
     }
+    $panier->deletePanierID($admin);
+    header('Location:index.php?page=success.php');
 }
 
 $liste = $panier->getPanier($admin);
-
 ?>
 
 
 <?php
-
 if ($liste != null) {
     $nbr = count($liste);
     ?>
@@ -70,8 +68,19 @@ if ($liste != null) {
                         <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Element du panier"/> '; ?></th>
                         <td>Prix : <?php echo $prix . '€'; ?></td>
                         <td> <?php echo $taille; ?></td>   
-                        <td><?php
-                            echo '<input type="submit" name="' . $numero . '" id="' . $numero . '" value="Suprimer" class="Send">';
+
+                        <td>
+                            <?php
+                            $stock = new StockArticleDB($cnx);
+                            $array = $stock->getStock($numero);
+                            $stockRest = $array[0]['stock'];
+                            if ($stockRest == 0) {
+                                ?>
+                                <p id="parag1">Plus en stock</p>
+                                <?php
+                            } else {
+                                echo '<input type="submit" name="' . $numero . '" id="' . $numero . '" value="Suprimer" class="Send">';
+                            }
                             ?></td>
                     </tr>
 

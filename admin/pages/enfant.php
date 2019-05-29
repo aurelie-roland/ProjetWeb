@@ -49,7 +49,13 @@ if ($liste != null) {
                     ?>
                     <tr>
                         <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Vetement enfant Star Wars"/> '; ?></th>
-                        <td>Prix : <?php echo $prix . '€'; ?></td>
+                        <td>Prix : <?php echo $prix . '€'; ?>
+                            <br><br><br><?php
+                            $stock = new StockArticleDB($cnx);
+                            $array = $stock->getStock($numero);
+                            echo "Stock restant : ".$array[0]['stock'];
+                            ?>
+                        </td>
                         <td> 
                             <?php echo '<select name="Taille' . $numero . '">
 												<option value="4">4</option>

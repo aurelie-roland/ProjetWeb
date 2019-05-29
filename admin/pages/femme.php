@@ -12,7 +12,8 @@ foreach ($liste as $num) {
     $prix = $num['prix'];
 
     if (isset($_POST[$number])) {
-        $Taille = $_POST['Taille'.$number];;
+        $Taille = $_POST['Taille' . $number];
+        ;
         $Article = $number;
         $Prix1 = $prix;
         $id = $admin;
@@ -47,7 +48,12 @@ if ($liste != null) {
                     ?>
                     <tr>
                         <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Vetements femme Star Wars"/> '; ?></th>
-                        <td>Prix : <?php echo $prix . '€'; ?></td>
+                        <td>Prix : <?php echo $prix . '€'; ?>
+                            <br><br><br><?php
+                            $stock = new StockArticleDB($cnx);
+                            $array = $stock->getStock($numero);
+                            echo "Stock restant : " . $array[0]['stock'];
+                            ?></td>
                         <td> <?php echo '<select name="Taille' . $numero . '">
 											<option value="XS">XS</option>
 											<option value="S">S</option>
@@ -56,7 +62,7 @@ if ($liste != null) {
 											<option value="XL">XL</option>
 											<option value="XXL">XXL</option>
 										</select>';
-                    ?>
+                            ?>
                         </td>
                         <td> 
                             <?php
