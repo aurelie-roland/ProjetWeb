@@ -17,7 +17,7 @@ class AdminDB extends Admin {
             $resultset->execute();
 
             while($data = $resultset->fetch()){
-                $_array[] = new Admin($data);
+                $_array[] = $data;
             }   
             
         }

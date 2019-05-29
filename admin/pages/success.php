@@ -1,0 +1,1 @@
+<p>La commande est bien passée, merci d'avoir acheté chez nous</p>

@@ -1,9 +1,10 @@
 <?php
-session_start(); //ADMIN
+//session_start(); //ADMIN
 ?>
 <!doctype html>
 <?php
 require './lib/php/admin_liste_include.php';
+session_start();
 $cnx = Connexion::getInstance($dsn, $user, $pass);
 ?>
 

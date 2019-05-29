@@ -2,51 +2,48 @@
 include ('lib/php/verifier_connexion.php');
 
 $set_name = false;
-
-if (isset($_POST['submit'])) {
-    echo $_POST['numero'];
-    $Taille = 0;
-    $Article = $_POST['numero'];
-    $Prix1 = $Prix;
-    $set_name = true;
-}
-?>
-
-<br>
-<div id="Tri">
-    <form name="Variable" method="post" action="index.php?page=Bijoux.php">
-        <label for="tri"><b>Trier par : </b></label>
-        <select name="tri">
-            <option value="1">Pertinence</option>
-            <option value="2">Ordre croissant</option>
-            <option value="3">Ordre decroissant</option>
-        </select>
-        <input type="submit" value="OK" name="OK"/>
-    </form>
-</div>
-
-
-
-<?php
-//récupération des produits
 $mail = $_SESSION['admin'];
-$client = new ClientDB($cnx);
-
-$listeCli = array();
-$listeCli = null;
-//$listeCli = $client->getIdClient($mail);
-//var_dump($listeCli);
+$admin = $mail[0]['idclient'];
 
 
 $panier = new PanierDB($cnx);
 
-$liste = array();
-$liste = null;
-$liste = $panier->getPanier(17);
-var_dump($liste);
+$liste = $panier->getPanier($admin);
+if ($liste != null) {
+    foreach ($liste as $num) {
+        $number = $num['narticle'];
+        $taille = $num['taille'];
+        if (isset($_POST[$number])) {
+            $id = $admin;
+            $panier->deletePanier($id, $number, $taille);
+        }
+    }
+}
+if (isset($_POST['sub'])) {
+    foreach ($liste as $num) {
+        $number = $num['narticle'];
+        $taille = $num['taille'];
+        $prix = $num['prix'];
+        $stock = new StockArticleDB($cnx);
+        $array = $stock->getStock($number);
+        var_dump($array);
+        //$stock = $array[0]['stock'] - 1;
+        $stock = 1;
+        $com = new CommandeDB($cnx);
+        $com->ajoutCommande($admin, $number, $prix, $taille);
+        $stock->supStock($number, $stock);
+        $panier->deletePanierID($admin);
+        header('Location:index.php?page=success.php');
+    }
+}
+
+$liste = $panier->getPanier($admin);
+
 ?>
 
+
 <?php
+
 if ($liste != null) {
     $nbr = count($liste);
     ?>
@@ -56,6 +53,8 @@ if ($liste != null) {
                 <tr>
                     <th scope="col">Article</th>
                     <th scope="col">Prix</th>
+                    <th scope="col">Taille</th>
+                    <th scope="col">Supprimer</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,15 +64,27 @@ if ($liste != null) {
                     $fichier = '../admin/images/' . $liste[$i]['narticle'] . '.jpg';
                     $numero = $liste[$i]['narticle'];
                     $prix = $liste[$i]['prix'];
+                    $taille = $liste[$i]['taille'];
                     ?>
                     <tr>
                         <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Element du panier"/> '; ?></th>
                         <td>Prix : <?php echo $prix . '€'; ?></td>
+                        <td> <?php echo $taille; ?></td>   
+                        <td><?php
+                            echo '<input type="submit" name="' . $numero . '" id="' . $numero . '" value="Suprimer" class="Send">';
+                            ?></td>
                     </tr>
 
                     <?php
                 }
                 ?>
+                <tfoot>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td><input type="submit" name="sub" id="sub" value="Commander" class="Send"></td>
+                    </tr>
+                </tfoot>
             </form>
             </tbody>
         </table>
@@ -83,8 +94,8 @@ if ($liste != null) {
 } else {
     ?>
     <div class="container">
-        <p>( contenu signifiant un problème ... )</p>
+        <p>Votre panier est vide</p>
     </div>
     <?php
 }
-
+?>  

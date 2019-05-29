@@ -7,33 +7,11 @@ class StockArticleDB  extends StockArticle{
     public function __construct($db){//contenu de $cnx (index)
         $this->_db = $db;
     }
-    
-    public function getStock(){
-        try{
-            $query = "select * from StockArticle";
-            $resultset = $this->_db->prepare($query);
-            $resultset->execute();
-
-            while($data = $resultset->fetch()){
-                $_array[] = new StockArticle($data);
-            }   
-            
-        }
-        catch(PDOException $e){
-            print $e->getMessage(); 
-        }
-        if(!empty($_array)){
-            return $_array;
-        }
-        else {
-            return null;
-        }
-    }
-    
+   
     public function getAllProduitsAutres() {
         try {
             $this->_db->beginTransaction();
-            $query = "select * from StockArticle where categorie = 'Autres'";
+            $query = "select * from StockArticle where categorie = 'Autres' and stock > 0";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $this->_db->commit();
@@ -53,7 +31,7 @@ class StockArticleDB  extends StockArticle{
     public function getAllProduitsEnfant() {
         try {
             $this->_db->beginTransaction();
-            $query = "select * from StockArticle where categorie = 'Enfant'";
+            $query = "select * from StockArticle where categorie = 'Enfant' and stock > 0";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $this->_db->commit();
@@ -73,7 +51,7 @@ class StockArticleDB  extends StockArticle{
     public function getAllProduitsFemme() {
         try {
             $this->_db->beginTransaction();
-            $query = "select * from StockArticle where categorie = 'Femme'";
+            $query = "select * from StockArticle where categorie = 'Femme' and stock > 0";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $this->_db->commit();
@@ -93,8 +71,51 @@ class StockArticleDB  extends StockArticle{
      public function getAllProduitsHomme() {
         try {
             $this->_db->beginTransaction();
-            $query = "select * from StockArticle where categorie = 'Homme'";
+            $query = "select * from StockArticle where categorie = 'Homme' and stock > 0";
             $resultset = $this->_db->prepare($query);
+            $resultset->execute();
+            $this->_db->commit();
+            while ($data = $resultset->fetch()) {
+                $_array[] = $data;
+            }
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+        if (!empty($_array)) {
+            return $_array;
+        } else {
+            return null;
+        }
+    }
+    
+    public function getStock($narticle) {
+        try {
+            $this->_db->beginTransaction();
+            $query = "select * from StockArticle where narticle = :narticle ";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':narticle', $narticle);
+            $resultset->execute();
+            $this->_db->commit();
+            while ($data = $resultset->fetch()) {
+                $_array[] = $data;
+            }
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+        if (!empty($_array)) {
+            return $_array;
+        } else {
+            return null;
+        }
+    }
+    
+    public function supStock($narticle, $stock) {
+        try {
+            $this->_db->beginTransaction();
+            $query = "update StockArticle set stock = :stock where narticle = :narticle ";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':narticle', $narticle);
+            $resultset->bindValue(':stock', $stock);
             $resultset->execute();
             $this->_db->commit();
             while ($data = $resultset->fetch()) {

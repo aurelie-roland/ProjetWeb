@@ -1,10 +1,11 @@
 <?php
-session_start();
+//session_start();
 //INDEX PUBLIC
 ?>
 <!doctype html>
 <?php
 require './admin/lib/php/admin_liste_include.php';
+session_start();
 $cnx = Connexion::getInstance($dsn, $user, $pass);
 ?>
 <html>
