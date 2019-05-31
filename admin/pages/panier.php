@@ -45,59 +45,61 @@ $liste = $panier->getPanier($admin);
 if ($liste != null) {
     $nbr = count($liste);
     ?>
-    <div class="container ecartTop3pc">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Article</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Taille</th>
-                    <th scope="col">Supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-            <form name="Variable" method="post" action="">
-                <?php
-                for ($i = 0; $i < $nbr; $i++) {
-                    $fichier = '../admin/images/' . $liste[$i]['narticle'] . '.jpg';
-                    $numero = $liste[$i]['narticle'];
-                    $prix = $liste[$i]['prix'];
-                    $taille = $liste[$i]['taille'];
-                    ?>
+    <div class="table-responsive">
+        <div class="container ecartTop3pc">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Element du panier"/> '; ?></th>
-                        <td>Prix : <?php echo $prix . '€'; ?></td>
-                        <td> <?php echo $taille; ?></td>   
-
-                        <td>
-                            <?php
-                            $stock = new StockArticleDB($cnx);
-                            $array = $stock->getStock($numero);
-                            $stockRest = $array[0]['stock'];
-                            if ($stockRest == 0) {
-                                ?>
-                                <p id="parag1">Plus en stock</p>
-                                <?php
-                            } else {
-                                echo '<input type="submit" name="' . $numero . '" id="' . $numero . '" value="Suprimer" class="Send">';
-                            }
-                            ?></td>
+                        <th scope="col">Article</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Taille</th>
+                        <th scope="col">Supprimer</th>
                     </tr>
-
+                </thead>
+                <tbody>
+                <form name="Variable" method="post" action="">
                     <?php
-                }
-                ?>
-                <tfoot>
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td><input type="submit" name="sub" id="sub" value="Commander" class="Send"></td>
-                    </tr>
-                </tfoot>
-            </form>
-            </tbody>
-        </table>
-        <hr>
+                    for ($i = 0; $i < $nbr; $i++) {
+                        $fichier = '../admin/images/' . $liste[$i]['narticle'] . '.jpg';
+                        $numero = $liste[$i]['narticle'];
+                        $prix = $liste[$i]['prix'];
+                        $taille = $liste[$i]['taille'];
+                        ?>
+                        <tr>
+                            <th scope="row"><?php echo '<img src="' . $fichier . '" alt="Element du panier"/> '; ?></th>
+                            <td>Prix : <?php echo $prix . '€'; ?></td>
+                            <td> <?php echo $taille; ?></td>   
+
+                            <td>
+                                <?php
+                                $stock = new StockArticleDB($cnx);
+                                $array = $stock->getStock($numero);
+                                $stockRest = $array[0]['stock'];
+                                if ($stockRest == 0) {
+                                    ?>
+                                    <p id="parag1">Plus en stock</p>
+                                    <?php
+                                } else {
+                                    echo '<input type="submit" name="' . $numero . '" id="' . $numero . '" value="Suprimer" class="Send">';
+                                }
+                                ?></td>
+                        </tr>
+
+                        <?php
+                    }
+                    ?>
+                    <tfoot>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td><input type="submit" name="sub" id="sub" value="Commander" class="Send"></td>
+                        </tr>
+                    </tfoot>
+                </form>
+                </tbody>
+            </table>
+            <hr>
+        </div>
     </div>
     <?php
 } else {

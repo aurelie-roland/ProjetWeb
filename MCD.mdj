@@ -454,13 +454,58 @@
 											"top": 467,
 											"width": 142,
 											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFrCmWjxhwOZWY=",
+											"_parent": {
+												"$ref": "AAAAAAFqVGWQaBUAf2A="
+											},
+											"model": {
+												"$ref": "AAAAAAFrCmWjtBwLygI="
+											},
+											"font": "Arial;13;0",
+											"left": 765,
+											"top": 482,
+											"width": 142,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFrCmXYLhwVFk0=",
+											"_parent": {
+												"$ref": "AAAAAAFqVGWQaBUAf2A="
+											},
+											"model": {
+												"$ref": "AAAAAAFrCmXYHxwS3Uw="
+											},
+											"font": "Arial;13;0",
+											"left": 765,
+											"top": 497,
+											"width": 142,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFrCmbqMBwmBcs=",
+											"_parent": {
+												"$ref": "AAAAAAFqVGWQaBUAf2A="
+											},
+											"model": {
+												"$ref": "AAAAAAFrCmbqAhwj9jQ="
+											},
+											"font": "Arial;13;0",
+											"left": 765,
+											"top": 512,
+											"width": 142,
+											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 760,
 									"top": 447,
 									"width": 152,
-									"height": 38
+									"height": 83
 								}
 							],
 							"font": "Arial;13;0",
@@ -995,6 +1040,36 @@
 								"$ref": "AAAAAAFqVGWQZxT8Z7s="
 							},
 							"name": "Stock",
+							"type": "serial",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFrCmWjtBwLygI=",
+							"_parent": {
+								"$ref": "AAAAAAFqVGWQZxT8Z7s="
+							},
+							"name": "Categorie",
+							"type": "text",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFrCmXYHxwS3Uw=",
+							"_parent": {
+								"$ref": "AAAAAAFqVGWQZxT8Z7s="
+							},
+							"name": "prix",
+							"type": "serial",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFrCmbqAhwj9jQ=",
+							"_parent": {
+								"$ref": "AAAAAAFqVGWQZxT8Z7s="
+							},
+							"name": "id",
 							"type": "serial",
 							"length": 0
 						}
