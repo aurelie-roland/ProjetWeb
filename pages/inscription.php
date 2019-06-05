@@ -1,13 +1,22 @@
-<?php 
-if(isset($_POST['OK'])){
-    extract($_POST,EXTR_OVERWRITE);
-    $log = new ClientDB($cnx);
-    $client = $log->addClient($Nom, $Prenom, $Mail, $MDP);
-    if(@is_null($client)){
-        print "<br/>Données incorrectes";        
-    }
-    else {      
-        print "Vous êtes bien inscrit";
+<?php
+if (isset($_POST['OK'])) {
+    if ($_POST['Nom'] == "" || $_POST['Prenom'] == "" || $_POST['Mail'] == "" || $_POST['MDP'] == "") {
+        echo "Veuillez remplir tous les champs";
+    } else {
+        extract($_POST, EXTR_OVERWRITE);
+        $log = new ClientDB($cnx);
+        $exist = $log->rechClient($Mail);
+        if ($exist == 1) {
+            $client = $log->addClient($Nom, $Prenom, $Mail, $MDP);
+            if (@is_null($client)) {
+                print "<br/>Données incorrectes";
+            } else {
+                print "Vous êtes bien inscrit";
+            }
+        }
+        else{
+            print "ERREUR ! Vous etes deja inscrit";
+        }
     }
 }
 ?>

@@ -2,19 +2,23 @@
 
 //si on a cliqué sur le bouton d'envoi du formulaire
 if(isset($_POST['submit_login'])){
-    //pour pouvoir utiliser les données hors tabl $_GET ou $_POST
-    extract($_POST,EXTR_OVERWRITE);
-    $log = new AdminDB($cnx);
-    //$admin et $password sont les noms des champs du formulaire
-    $admin = $log->getAdmin($login, $password);
-    if(is_null($admin)){
-        print "<br/>Données incorrectes";        
+    if ( $_POST['login'] == "" || $_POST['password'] == "") {
+        echo "Veuillez remplir tous les champs";
+    } else {
+        //pour pouvoir utiliser les données hors tabl $_GET ou $_POST
+        extract($_POST, EXTR_OVERWRITE);
+        $log = new AdminDB($cnx);
+        //$admin et $password sont les noms des champs du formulaire
+        $admin = $log->getAdmin($login, $password);
+        if (is_null($admin)) {
+            print "<br/>Données incorrectes";
+        } else {
+            $_SESSION['admin'] = $admin;
+            unset($_SESSION['page']);
+            print "<meta http-equiv=\"refresh\": Content=\"0;URL=./admin/index.php\">";
+        }
     }
-    else {
-        $_SESSION['admin']=$admin;
-        unset($_SESSION['page']);        
-        print "<meta http-equiv=\"refresh\": Content=\"0;URL=./admin/index.php\">";
-    }
+    
 }
 ?>
 

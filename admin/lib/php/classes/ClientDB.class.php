@@ -44,5 +44,24 @@ class ClientDB extends Client {
             return null;
         }
     }
+    
+    public function rechClient($Mail){
+        try {
+            $query = "select * from client where mail= :mail";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':mail', $Mail);
+            $resultset->execute();
+            while ($data = $resultset->fetch()) {
+                $_array[] = new Client($data);
+            }
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+        if (!empty($_array)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }
 ?>
