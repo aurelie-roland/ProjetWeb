@@ -6,22 +6,22 @@ $liste = array();
 $liste = null;
 $liste = $stock->getAllProduits("Femme");
 
-if (isset($_POST['OK'])) {
-    $choix = $_POST['tri'];
+if (isset($_GET['OK'])) {
+    $choix = $_GET['tri'];
     $liste = $stock->triStock($choix, "Femme");
 }
 ?>
 
 <br>
 <div id="Tri">
-    <form name="Variable" method="post" action="">
+    <form name="Variable" method="get" action="">
         <label for="tri"><b>Trier par : </b></label>
-        <select name="tri">
+        <select name="tri" id="triSel">
             <option value="1">Pertinence</option>
             <option value="2">Ordre croissant</option>
             <option value="3">Ordre decroissant</option>
         </select>
-        <input type="submit" value="OK" name="OK"/>
+        <input type="submit" value="OK" name="OK" id="OK"/>
     </form>
 </div>
 

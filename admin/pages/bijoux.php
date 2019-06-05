@@ -6,8 +6,8 @@ $liste = array();
 $liste = null;
 $liste = $stock->getAllProduits("Autres");
 
-if (isset($_POST['OK'])) {
-    $choix = $_POST['tri'];
+if (isset($_GET['OK'])) {
+    $choix = $_GET['tri'];
     $liste = $stock->triStock($choix, "Autres");
 }
 
@@ -30,9 +30,9 @@ foreach ($liste as $num) {
 ?>
 <br>
 <div id="Tri">
-    <form name="Variable" method="post" action="">
+    <form name="Variable" method="get" action="">
         <label for="tri"><b>Trier par : </b></label>
-        <select name="tri">
+        <select name="tri" id="triSel">
             <option value="1">Pertinence</option>
             <option value="2">Ordre croissant</option>
             <option value="3">Ordre decroissant</option>

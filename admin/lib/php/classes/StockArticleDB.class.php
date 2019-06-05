@@ -100,5 +100,16 @@ class StockArticleDB extends StockArticle {
             return null;
         }
     }
+    
+    public function updateStock($champ, $nouveau, $id) {
+
+        try {
+            $query = "UPDATE stockarticle set " . $champ . " = '" . $nouveau . "' where id ='" . $id . "'";
+            $resultset = $this->_db->prepare($query);
+            $resultset->execute();
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+    }
 
 }
