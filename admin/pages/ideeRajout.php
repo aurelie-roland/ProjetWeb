@@ -23,13 +23,13 @@ $nbr = count($liste);
             ?>
             <tr>
                 <td class="ecart"><?php print $liste[$i]['id']; ?></td>
-                <td><span contenteditable="true" name="narticle" class="ecart" id="<?php print $liste[$i]['id']; ?>">
+                <td><span contenteditable="false" name="narticle" class="ecart" id="<?php print $liste[$i]['id']; ?>">
                         <?php print $liste[$i]['narticle']; ?></span>
                 </td>
                 <td><span contenteditable="true" name="stock" class="ecart" id="<?php print $liste[$i]['id']; ?>">
                         <?php print $liste[$i]['stock']; ?></span>
                 </td>
-                <td><span contenteditable="true" name="categorie" class="ecart" id="<?php print $liste[$i]['id']; ?>">
+                <td><span contenteditable="false" name="categorie" class="ecart" id="<?php print $liste[$i]['id']; ?>">
                         <?php print $liste[$i]['categorie']; ?></span>
                 </td>
                 <td><span contenteditable="true" name="prix" class="ecart" id="<?php print $liste[$i]['id']; ?>">

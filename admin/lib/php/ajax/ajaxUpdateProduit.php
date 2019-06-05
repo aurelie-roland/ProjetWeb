@@ -12,6 +12,7 @@ try{
    extract($_GET,EXTR_OVERWRITE);
     $parametre = 'id='.$id.'&champ='.$champ.'&nouveau='.$nouveau;
     $update->updateStock($champ, $nouveau, $id);
+    print json_encode($update);
 }
 catch(PDOException $e){
     print $e->getMessage()." ".$e->getLine()." ".$e->getTrace()." ".$e->getCode();
